@@ -1,5 +1,6 @@
 package com.projects.LibraryManagementSystem.model;
 
+import com.projects.LibraryManagementSystem.enums.TxnStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,7 +23,7 @@ public class Txn extends TimeStamps {
 
     private TxnStatus txnStatus;
 
-    private Double settlementAmount;
+    private Double settlementAmount; // this amount depends on when the book is returned
 
     private Date issuedDate;
 

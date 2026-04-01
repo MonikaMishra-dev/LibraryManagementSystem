@@ -1,4 +1,4 @@
-package com.projects.LibraryManagementSystem.model;
+package com.projects.LibraryManagementSystem.enums;
 
 public enum TxnStatus {
     ISSUED,

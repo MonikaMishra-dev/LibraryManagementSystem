@@ -1,5 +1,6 @@
 package com.projects.LibraryManagementSystem.model;
 
+import com.projects.LibraryManagementSystem.enums.BookType;
 import jakarta.persistence.*;
 import lombok.*;
 

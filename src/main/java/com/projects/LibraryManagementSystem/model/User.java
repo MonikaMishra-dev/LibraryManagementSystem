@@ -1,6 +1,8 @@
 package com.projects.LibraryManagementSystem.model;
 
 
+import com.projects.LibraryManagementSystem.enums.UserStatus;
+import com.projects.LibraryManagementSystem.enums.UserType;
 import jakarta.persistence.*;
 import lombok.*;
 
