@@ -41,4 +41,5 @@ public class Book extends TimeStamps{
 
     @OneToMany(mappedBy = "book")
     private List<Txn> txnList;
+
 }
