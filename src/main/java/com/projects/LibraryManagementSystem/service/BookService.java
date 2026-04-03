@@ -5,6 +5,8 @@ import com.projects.LibraryManagementSystem.dto.BookCreationResponse;
 import com.projects.LibraryManagementSystem.enums.BookFilter;
 import com.projects.LibraryManagementSystem.enums.BookType;
 import com.projects.LibraryManagementSystem.enums.Operator;
+import com.projects.LibraryManagementSystem.model.Author;
+import com.projects.LibraryManagementSystem.model.AuthorCompositeKey;
 import com.projects.LibraryManagementSystem.model.Book;
 import com.projects.LibraryManagementSystem.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class BookService {
@@ -19,16 +22,25 @@ public class BookService {
     @Autowired
     private BookRepository bookRepository;
 
+    @Autowired
+    private AuthorService authorService;
+
     public BookCreationResponse addBook(BookCreationRequest request) {
         //author is already present or not
-
+        Author authorFromDb = authorService.findAuthorFromDb(request.getAuthorEmail());
+        if (authorFromDb == null) {
+            authorFromDb = authorService.saveMyAuthor(Author.builder().
+                    id(UUID.randomUUID().toString()).
+                    email(request.getAuthorEmail()).
+                    name(request.getAuthorName()).
+                    build());
+        }
         Book book = request.toBook();
-        Book bookFromDb = bookRepository.save(book);
+        book.setAuthor(authorFromDb);
+        book = bookRepository.save(book);
         return BookCreationResponse.builder().
-                bookTitle(bookFromDb.getTitle()).
-                bookNo(bookFromDb.getBookNo()).
-                bookSecurityAmount(bookFromDb.getSecurityAmount()).
-                bookType(bookFromDb.getBookType()).
+                bookTitle(book.getTitle()).
+                bookNo(book.getBookNo()).
                 build();
     }
 

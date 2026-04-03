@@ -15,8 +15,4 @@ public class BookCreationResponse {
     private String bookTitle;
 
     private String bookNo;
-
-    private BookType bookType;
-
-    private Double bookSecurityAmount;
 }

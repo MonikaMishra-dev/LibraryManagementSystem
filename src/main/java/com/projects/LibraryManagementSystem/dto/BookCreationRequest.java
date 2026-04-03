@@ -31,7 +31,7 @@ public class BookCreationRequest {
     private String authorName;
 
     @NotBlank(message = "author email must not be blank")
-    private String authorTitle;
+    private String authorEmail;
 
     public Book toBook(){
         return Book.builder().
