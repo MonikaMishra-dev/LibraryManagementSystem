@@ -12,20 +12,23 @@ import java.util.List;
 @ToString
 @Entity
 @Builder
+@IdClass(AuthorCompositeKey.class)
 public class Author extends TimeStamps{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
+
+    @Id
+    @Column(nullable = false,unique = true,length = 50)
+    private String email;
 
     @Column(length = 50)
     private String name;
-
-    @Column(nullable = false,unique = true,length = 50)
-    private String email;
 
     @OneToMany(mappedBy = "author")
     private List<Book> bookList;
 
 
 }
+
+// I want to make a composite key.

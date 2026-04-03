@@ -36,7 +36,10 @@ public class Book extends TimeStamps{
     private User user;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumns({
+            @JoinColumn(name = "author_id", referencedColumnName = "id"),
+            @JoinColumn(name = "author_email", referencedColumnName = "email")
+    })
     private Author author;
 
     @OneToMany(mappedBy = "book")

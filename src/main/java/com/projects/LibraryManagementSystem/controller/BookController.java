@@ -16,13 +16,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/book")
+@Validated
 public class BookController {
 
     @Autowired
     private BookService bookService;
 
     @PostMapping("/addBook")
-    public BookCreationResponse addBook(@RequestBody @Validated BookCreationRequest request){
+    public BookCreationResponse addBook(@RequestBody  BookCreationRequest request){
         return bookService.addBook(request);
     }
 

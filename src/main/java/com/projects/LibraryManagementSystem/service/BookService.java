@@ -20,6 +20,8 @@ public class BookService {
     private BookRepository bookRepository;
 
     public BookCreationResponse addBook(BookCreationRequest request) {
+        //author is already present or not
+
         Book book = request.toBook();
         Book bookFromDb = bookRepository.save(book);
         return BookCreationResponse.builder().
