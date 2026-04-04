@@ -14,14 +14,10 @@ public interface BookRepository extends JpaRepository<Book,Integer> {
 
 
     List<Book> findByBookNo(String bookNo);
-    List<Book> findByBookNoLike(String bookNo);
-    List<Book> findByBookNoContains(String bookNo);
+
 
     List<Book> findByBookType(BookType bookType);
     List<Book> findByBookTypeContains(BookType bookType);
 
-    List<Book> findBySecurityAmount(Double securityAmount);
-    List<Book> findBySecurityAmountLessThan(Double securityAmount);
-    List<Book> findBySecurityAmountLessThanEqual(Double securityAmount);
 
 }

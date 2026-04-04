@@ -1,11 +1,9 @@
-package com.projects.LibraryManagementSystem.service;
+package com.projects.LibraryManagementSystem.service.impl;
 
 import com.projects.LibraryManagementSystem.dto.UserCreationRequest;
 import com.projects.LibraryManagementSystem.dto.UserCreationResponse;
-import com.projects.LibraryManagementSystem.dto.UserFilterResponse;
 import com.projects.LibraryManagementSystem.enums.Operator;
 import com.projects.LibraryManagementSystem.enums.UserFilter;
-import com.projects.LibraryManagementSystem.model.Book;
 import com.projects.LibraryManagementSystem.model.User;
 import com.projects.LibraryManagementSystem.enums.UserType;
 import com.projects.LibraryManagementSystem.repository.UserRepository;
