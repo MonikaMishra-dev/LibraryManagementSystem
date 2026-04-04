@@ -13,7 +13,6 @@ import com.projects.LibraryManagementSystem.service.BookFilterStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,14 +31,21 @@ public class BookService {
     public BookCreationResponse addBook(BookCreationRequest request) {
         //author is already present or not
         Author authorFromDb = authorService.findAuthorFromDb(request.getAuthorEmail());
+//        if (authorFromDb == null) {
+//            authorFromDb = authorService.saveMyAuthor(Author.builder().
+//                    id(UUID.randomUUID().toString()).
+//                    email(request.getAuthorEmail()).
+//                    name(request.getAuthorName()).
+//                    build());
+//        }
+        Book book = request.toBook();
         if (authorFromDb == null) {
-            authorFromDb = authorService.saveMyAuthor(Author.builder().
+            authorFromDb =Author.builder().
                     id(UUID.randomUUID().toString()).
                     email(request.getAuthorEmail()).
                     name(request.getAuthorName()).
-                    build());
+                    build();
         }
-        Book book = request.toBook();
         book.setAuthor(authorFromDb);
         book = bookRepository.save(book);
         return BookCreationResponse.builder().

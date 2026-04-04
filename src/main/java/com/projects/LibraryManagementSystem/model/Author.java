@@ -1,5 +1,6 @@
 package com.projects.LibraryManagementSystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,6 +26,7 @@ public class Author extends TimeStamps{
     @Column(length = 50)
     private String name;
 
+    //@JsonIgnore[Ignore this field while sending the response]
     @OneToMany(mappedBy = "author")
     private List<Book> bookList;
 
