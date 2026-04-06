@@ -7,9 +7,11 @@ import com.projects.LibraryManagementSystem.enums.BookFilter;
 import com.projects.LibraryManagementSystem.enums.Operator;
 import com.projects.LibraryManagementSystem.model.Author;
 import com.projects.LibraryManagementSystem.model.Book;
+import com.projects.LibraryManagementSystem.model.User;
 import com.projects.LibraryManagementSystem.repository.BookRepository;
 import com.projects.LibraryManagementSystem.service.BookFilterFactory;
 import com.projects.LibraryManagementSystem.service.BookFilterStrategy;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,5 +59,17 @@ public class BookService {
     public List<BookFilterResponse> filterBook(BookFilter filterBy, Operator operator, String value) {
         BookFilterStrategy strategy = bookFilterFactory.getStrategy(filterBy);
         return strategy.getFilteredBook(operator,value);
+    }
+
+    public Book checkForValidBook(@NotBlank(message = "book number must not be blank") String bookNo) {
+    List<Book> bookList = bookRepository.findByBookNo(bookNo);
+    if(bookList.isEmpty())
+        return null;
+    return bookList.get(0);
+    }
+
+    public void markBookAsUnavailable(Book bookFromDb, User userFromDb) {
+        bookFromDb.setUser(userFromDb);
+        bookRepository.save(bookFromDb);
     }
 }

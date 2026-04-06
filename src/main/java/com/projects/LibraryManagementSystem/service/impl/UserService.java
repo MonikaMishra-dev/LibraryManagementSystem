@@ -7,6 +7,7 @@ import com.projects.LibraryManagementSystem.enums.UserFilter;
 import com.projects.LibraryManagementSystem.model.User;
 import com.projects.LibraryManagementSystem.enums.UserType;
 import com.projects.LibraryManagementSystem.repository.UserRepository;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -66,6 +67,13 @@ public class UserService {
             }
         }
         return new ArrayList<>();
+    }
+
+    public User checkForValidUser(@NotBlank(message = "user email must not be blank") String userEmail) {
+        List<User> userList = userRepository.findByEmail(userEmail);
+        if(userList.isEmpty())
+            return null;
+        return userList.get(0);
     }
 }
 
