@@ -33,7 +33,7 @@ public class Txn extends TimeStamps {
     @JoinColumn
     private User user;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
     private Book book;
 

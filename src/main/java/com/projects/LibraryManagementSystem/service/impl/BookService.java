@@ -53,6 +53,7 @@ public class BookService {
         return BookCreationResponse.builder().
                 bookTitle(book.getTitle()).
                 bookNo(book.getBookNo()).
+                securityAmount(book.getSecurityAmount()).
                 build();
     }
 
