@@ -1,6 +1,6 @@
 package com.projects.LibraryManagementSystem.service.impl;
 
-import com.projects.LibraryManagementSystem.dto.BookFilterResponse;
+import com.projects.LibraryManagementSystem.dto.responsedtos.BookFilterResponse;
 import com.projects.LibraryManagementSystem.enums.BookType;
 import com.projects.LibraryManagementSystem.enums.Operator;
 import com.projects.LibraryManagementSystem.model.Book;
@@ -8,10 +8,8 @@ import com.projects.LibraryManagementSystem.repository.BookRepository;
 import com.projects.LibraryManagementSystem.service.BookFilterStrategy;
 import com.projects.LibraryManagementSystem.service.BookMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

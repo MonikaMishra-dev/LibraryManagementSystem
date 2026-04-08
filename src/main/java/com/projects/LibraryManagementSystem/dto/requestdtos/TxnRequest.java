@@ -1,4 +1,4 @@
-package com.projects.LibraryManagementSystem.dto;
+package com.projects.LibraryManagementSystem.dto.requestdtos;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;

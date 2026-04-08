@@ -1,8 +1,8 @@
 package com.projects.LibraryManagementSystem.service.impl;
 
-import com.projects.LibraryManagementSystem.dto.BookCreationRequest;
-import com.projects.LibraryManagementSystem.dto.BookCreationResponse;
-import com.projects.LibraryManagementSystem.dto.BookFilterResponse;
+import com.projects.LibraryManagementSystem.dto.requestdtos.BookCreationRequest;
+import com.projects.LibraryManagementSystem.dto.responsedtos.BookCreationResponse;
+import com.projects.LibraryManagementSystem.dto.responsedtos.BookFilterResponse;
 import com.projects.LibraryManagementSystem.enums.BookFilter;
 import com.projects.LibraryManagementSystem.enums.Operator;
 import com.projects.LibraryManagementSystem.model.Author;

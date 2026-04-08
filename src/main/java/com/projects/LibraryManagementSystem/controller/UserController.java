@@ -1,7 +1,7 @@
 package com.projects.LibraryManagementSystem.controller;
 
-import com.projects.LibraryManagementSystem.dto.UserCreationRequest;
-import com.projects.LibraryManagementSystem.dto.UserCreationResponse;
+import com.projects.LibraryManagementSystem.dto.requestdtos.UserCreationRequest;
+import com.projects.LibraryManagementSystem.dto.responsedtos.UserCreationResponse;
 import com.projects.LibraryManagementSystem.enums.Operator;
 import com.projects.LibraryManagementSystem.enums.UserFilter;
 import com.projects.LibraryManagementSystem.model.User;

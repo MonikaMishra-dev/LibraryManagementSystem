@@ -1,7 +1,7 @@
 package com.projects.LibraryManagementSystem.service.impl;
 
-import com.projects.LibraryManagementSystem.dto.TxnRequest;
-import com.projects.LibraryManagementSystem.dto.TxnReturnRequest;
+import com.projects.LibraryManagementSystem.dto.requestdtos.TxnRequest;
+import com.projects.LibraryManagementSystem.dto.requestdtos.TxnReturnRequest;
 import com.projects.LibraryManagementSystem.enums.TxnStatus;
 import com.projects.LibraryManagementSystem.exception.BookException;
 import com.projects.LibraryManagementSystem.exception.TxnException;

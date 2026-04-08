@@ -1,7 +1,7 @@
 package com.projects.LibraryManagementSystem.service;
 
 
-import com.projects.LibraryManagementSystem.dto.BookFilterResponse;
+import com.projects.LibraryManagementSystem.dto.responsedtos.BookFilterResponse;
 import com.projects.LibraryManagementSystem.model.Book;
 
 public class BookMapperUtil {

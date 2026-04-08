@@ -1,15 +1,17 @@
 package com.projects.LibraryManagementSystem.controller;
 
 
-import com.projects.LibraryManagementSystem.dto.BookCreationRequest;
-import com.projects.LibraryManagementSystem.dto.BookCreationResponse;
-import com.projects.LibraryManagementSystem.dto.BookFilterResponse;
+import com.projects.LibraryManagementSystem.dto.GenericResponse;
+import com.projects.LibraryManagementSystem.dto.requestdtos.BookCreationRequest;
+import com.projects.LibraryManagementSystem.dto.responsedtos.BookCreationResponse;
+import com.projects.LibraryManagementSystem.dto.responsedtos.BookFilterResponse;
 import com.projects.LibraryManagementSystem.enums.BookFilter;
 import com.projects.LibraryManagementSystem.enums.Operator;
-import com.projects.LibraryManagementSystem.model.Book;
 import com.projects.LibraryManagementSystem.service.impl.BookService;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,8 +26,20 @@ public class BookController {
     private BookService bookService;
 
     @PostMapping("/addBook")
-    public BookCreationResponse addBook(@RequestBody  BookCreationRequest request){
-        return bookService.addBook(request);
+    public ResponseEntity<GenericResponse> addBook(@RequestBody  BookCreationRequest request){
+        BookCreationResponse response = bookService.addBook(request);
+        GenericResponse genericResponse = GenericResponse.builder().
+                data(response).
+                build();
+        if(response!=null){
+            genericResponse.setMsg("Successful");
+            genericResponse.setErrorCode(1);
+        }
+        else{
+            genericResponse.setMsg("Failure");
+            genericResponse.setErrorCode(0);
+        }
+        return new ResponseEntity<>(genericResponse, HttpStatus.OK);
     }
 
     @GetMapping("/filter")

@@ -1,4 +1,4 @@
-package com.projects.LibraryManagementSystem.dto;
+package com.projects.LibraryManagementSystem.dto.responsedtos;
 
 
 import lombok.*;
