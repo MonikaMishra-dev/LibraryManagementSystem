@@ -114,7 +114,7 @@ public class TxnService {
 
     }
 
-    private Double calculateSettlementAmount(Txn txnFromDb, Book bookFromDb) {
+    public  Double calculateSettlementAmount(Txn txnFromDb, Book bookFromDb) {
         long issueTime = txnFromDb.getIssuedDate().getTime();
         long returnTime = System.currentTimeMillis();
         long diff = returnTime - issueTime;
