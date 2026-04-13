@@ -27,6 +27,7 @@ public class Book extends TimeStamps{
     @Column(length = 20,unique = true,nullable = false)
     private String bookNo;
 
+    @Enumerated(EnumType.STRING)
     private BookType bookType;
 
     @Column(nullable = false)
