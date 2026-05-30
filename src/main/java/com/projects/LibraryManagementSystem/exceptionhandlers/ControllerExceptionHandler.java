@@ -33,4 +33,8 @@ public class ControllerExceptionHandler {
     public ResponseEntity<Object> handleUserException(UserException ex){
         return new ResponseEntity<>(ex.getMessage(),HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(value = Exception.class)
+    public ResponseEntity<Object> handleException(Exception ex){
+        return new ResponseEntity<>(ex.getMessage(),HttpStatus.NOT_ACCEPTABLE);
+    }
 }

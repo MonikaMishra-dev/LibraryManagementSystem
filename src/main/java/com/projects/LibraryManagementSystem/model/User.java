@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Entity
 @Builder
 @Table(name = "\"USER\"")

@@ -6,6 +6,7 @@ import com.projects.LibraryManagementSystem.enums.Operator;
 import com.projects.LibraryManagementSystem.enums.UserFilter;
 import com.projects.LibraryManagementSystem.model.User;
 import com.projects.LibraryManagementSystem.enums.UserType;
+import com.projects.LibraryManagementSystem.repository.UserCacheRepository;
 import com.projects.LibraryManagementSystem.repository.UserRepository;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private UserCacheRepository userCacheRepository;
 
     @Value("${student.authority}")
     private String studentAuthority;
@@ -92,9 +96,17 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email);
-        if (user == null)
-            throw new UsernameNotFoundException("User not found!!");
+        User user = userCacheRepository.getUser(email);
+//        System.out.println("Authorities: " + user.getAuthorities());
+//        System.out.println("Password: " + user.getPassword());
+        if (user == null) {
+            user = userRepository.findByEmail(email);
+            if (user == null)
+                throw new UsernameNotFoundException("User not found!!");
+
+            userCacheRepository.setUser(email, user);
+        }
+
         return user;
     }
 
