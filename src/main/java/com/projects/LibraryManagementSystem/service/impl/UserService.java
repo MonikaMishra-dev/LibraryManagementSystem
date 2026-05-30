@@ -9,20 +9,36 @@ import com.projects.LibraryManagementSystem.enums.UserType;
 import com.projects.LibraryManagementSystem.repository.UserRepository;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Value("${student.authority}")
+    private String studentAuthority;
+
+    @Value("${admin.authority}")
+    private String adminAuthority;
+
     public UserCreationResponse addStudent(UserCreationRequest request) {
         User user = request.toUser();
         user.setUserType(UserType.STUDENT);
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setAuthorities(studentAuthority);
         User userFromDb = userRepository.save(user);
         return UserCreationResponse.builder().
                 userName(userFromDb.getName()).
@@ -47,7 +63,7 @@ public class UserService {
             }
             case EMAIL:{
                 switch (operator){
-                    case EQUALS -> {return userRepository.findByEmail(value);}
+//                    case EQUALS -> {return userRepository.findByEmail(value);}
                     case IN -> {}
                     case LIKE -> {return userRepository.findByEmailLike("%"+value+"%");}
                     case CONTAINS -> {return userRepository.findByEmailContains(value);}
@@ -70,10 +86,30 @@ public class UserService {
     }
 
     public User checkForValidUser(@NotBlank(message = "user email must not be blank") String userEmail) {
-        List<User> userList = userRepository.findByEmail(userEmail);
-        if(userList.isEmpty())
-            return null;
-        return userList.get(0);
+        return userRepository.findByEmail(userEmail);
+
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(email);
+        if (user == null)
+            throw new UsernameNotFoundException("User not found!!");
+        return user;
+    }
+
+    public UserCreationResponse addAdmin(UserCreationRequest request) {
+        User user = request.toUser();
+        user.setUserType(UserType.ADMIN);
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setAuthorities(adminAuthority);
+        User userFromDb = userRepository.save(user);
+        return UserCreationResponse.builder().
+                userName(userFromDb.getName()).
+                userEmail(userFromDb.getEmail()).
+                userPhone(userFromDb.getPhoneNo()).
+                userAddress(userFromDb.getAddress()).
+                build();
     }
 }
 

@@ -24,6 +24,11 @@ public class UserController {
         return userService.addStudent(request);
     }
 
+    @PostMapping("/addAdmin")
+    public UserCreationResponse addAdmin(@RequestBody @Validated UserCreationRequest request) {
+        return userService.addAdmin(request);
+    }
+
     @GetMapping("/filter")
     public List<User> filteredUser(@RequestParam("filterBy") UserFilter filterBy,
                                    @RequestParam("operator") Operator operator,
